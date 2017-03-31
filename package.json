@@ -1,0 +1,27 @@
+{
+  "name": "angular-starter-pack",
+  "version": "1.0.0",
+  "description": "angular-starter-pack",
+  "scripts": {
+    "clean": "rm -rf ./dist",
+    "build:prod": "npm run clean && ./node_modules/.bin/webpack --env=prod --progress --profile --colors",
+    "build:dev": "npm run clean && ./node_modules/.bin/webpack --env=dev --progress --profile --colors",
+    "serve": "./node_modules/.bin/webpack-dev-server",
+    "watch": "npm run build:dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ideatosrl/angular-starter-pack.git"
+  },
+  "author": "ideato srl",
+  "license": "MIT",
+  "dependencies": {
+    "angular": "^1.6.3"
+  },
+  "devDependencies": {
+    "html-webpack-plugin": "^2.28.0",
+    "webpack": "^2.3.2",
+    "webpack-dev-server": "^2.4.2"
+  }
+}
