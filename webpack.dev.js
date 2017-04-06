@@ -25,6 +25,12 @@ module.exports = function (env) {
       new CopyWebpackPlugin([{
         from: __dirname + '/src/img',
         to: __dist + '/img'
+      }, {
+        from: __dirname + '/src/app/**/*.html',
+        to: __dist,
+        transformPath: function(targetPath, sourcePath) {
+          return targetPath.replace('src/app/', '');
+        }
       }]),
       new HtmlWebpackPlugin({
           template: __dirname + '/src/index.html',
@@ -33,7 +39,7 @@ module.exports = function (env) {
       new webpack.optimize.CommonsChunkPlugin({
         name: 'vendor',
         filename: '[name].bundle.js'
-      })
+      }),
     ],
     devServer: {
       contentBase: __dist,
