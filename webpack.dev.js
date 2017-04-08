@@ -3,6 +3,8 @@
 // Modules
 const webpack = require('webpack');
 const glob = require('glob');
+const autoprefixer = require('autoprefixer');
+
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -29,7 +31,7 @@ module.exports = function (env) {
         test: /\.scss$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: ['css-loader', 'sass-loader']
+          use: ['css-loader', 'postcss-loader', 'sass-loader']
         })
       }]
     },
@@ -51,6 +53,13 @@ module.exports = function (env) {
       new webpack.optimize.CommonsChunkPlugin({
         name: 'vendor',
         filename: 'js/[name].bundle.js'
+      }),
+      new webpack.LoaderOptionsPlugin({
+        options: {
+          postcss: [
+            autoprefixer(),
+          ]
+         }
       }),
       new ExtractTextPlugin('css/[name].bundle.css')
     ],
