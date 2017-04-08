@@ -16,7 +16,10 @@ module.exports = function (env) {
     entry: {
       'app' : __dirname + '/src/app/root.module.js',
       'vendor' : ['angular'],
-      'style': glob.sync(__dirname + '/src/sass/**/*.scss'),
+      'style': __dirname + '/src/sass/main.scss',
+      'vendor-style': [
+        __dirname + '/node_modules/angular/angular-csp.css',
+      ],
     },
     output: {
       path: __dist,
@@ -32,7 +35,15 @@ module.exports = function (env) {
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: ['css-loader', 'postcss-loader', 'sass-loader']
-        })
+        }),
+        exclude: __dirname + '/node_modules'
+      }, {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader']
+        }),
+        exclude: __dirname + '/src'
       }]
     },
     plugins: [
